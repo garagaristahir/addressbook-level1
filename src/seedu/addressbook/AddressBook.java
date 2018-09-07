@@ -1,5 +1,5 @@
 package seedu.addressbook;
-// Test här
+
 /*
  * NOTE : =============================================================
  * This class is written in a procedural fashion (i.e. not Object-Oriented)
@@ -207,15 +207,22 @@ public class AddressBook {
      */
 
     public static void main(String[] args) {
-        showWelcomeMessage();
+        showWelcomeMessage(); // Shows verison and says welcome
+
         processProgramArgs(args);
         loadDataFromStorage();
+        String name = getUserName();
         while (true) {
-            String userCommand = getUserInput();
+            String userCommand = getUserInput(name);
             echoUserCommand(userCommand);
             String feedback = executeCommand(userCommand);
             showResultToUser(feedback);
         }
+    }
+    private static String getUserName() {
+        System.out.print(LINE_PREFIX + "Hello and Welcome User. What is your name?: ");
+        String inputLine = SCANNER.nextLine();
+        return inputLine;
     }
 
     /*
@@ -598,8 +605,8 @@ public class AddressBook {
      *
      * @return full line entered by the user
      */
-    private static String getUserInput() {
-        System.out.print(LINE_PREFIX + "Enter command: ");
+    private static String getUserInput(String name) {
+        System.out.print(LINE_PREFIX +name  + " please enter your command: ");
         String inputLine = SCANNER.nextLine();
         // silently consume all blank and comment lines
         while (inputLine.trim().isEmpty() || inputLine.trim().charAt(0) == INPUT_COMMENT_MARKER) {
